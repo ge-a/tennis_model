@@ -17,3 +17,11 @@
 2. Write a try catch loop that runs a match 3? times before it gives up and moves onto the next line in case of errors
 3. Output expected EV calculations into a df containing historical match and odds data 
 4. Write a function placing wagers with unit sizes corresponding to odds in order to calculate our net gain
+
+## Priorities
+1. General QOL 2 + 4 - DONE
+2. General QOL 3 - DONE
+3. General QOL 1
+4. Backtesting
+5. Model Improvements 1
+6. Model Improvemnets 3

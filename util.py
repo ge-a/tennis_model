@@ -35,3 +35,19 @@ def score_reader(score):
         i += 1
     total_games = w_games_won + l_games_won
     return w_games_won, l_games_won, total_games, tiebreaks, w_tiebreaks_won, l_tiebreaks_won, tiebreak_points, num_sets
+
+def get_american_odds(win_percentage):
+    # Convert decimal odds to American odds
+    win_percentage = win_percentage * 100
+    decimal_odds = 100 / win_percentage
+    
+    if win_percentage <= 50:
+        # Underdog (positive odds)
+        american_odds = round((decimal_odds - 1) * 100)
+        return f"+{american_odds}"
+    else:
+        # Favorite (negative odds)
+        american_odds = round(100 / (decimal_odds - 1))
+        if american_odds == float('inf'):  # Handle 100% probability
+            return "-10000"  # Very high negative odds for near-certain events
+        return f"-{american_odds}"
