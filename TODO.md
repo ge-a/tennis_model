@@ -4,7 +4,6 @@
 1. Figure out why in certain instances pulling a player's data requries multiple runs
 
 ## Model Improvements
-1. If we do not have the surface speed for a tournament then we use the average speed of the surface for calculations
 2. Add weights for more recent matches vs older ones, perhaps weight current tournament form more than previous form as well
 3. Take into account player's historical preferences by surface speed ranges to adjust odds
 4. Write toggles for different new features to allow for ease in backtesting
@@ -24,5 +23,4 @@
 1. Add BO5
 2. General QOL 1
 3. Backtesting
-4. Model Improvements 1
 5. Model Improvemnets 3

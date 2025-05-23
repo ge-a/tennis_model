@@ -1,5 +1,5 @@
 import pandas as pd
-from util import score_reader
+from src.util import score_reader
 
 players = pd.read_csv('data/atp_players.csv')
 
