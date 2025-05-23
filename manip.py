@@ -88,7 +88,7 @@ class PlayerServeReturnStats(TennisDataScraper):
         self.current_tournament = current_tournament
         
     def gather_last_x_weeks(self, num_weeks=-1):
-        abbreviated_data = self.recent_results[["Match", "Date", "Scoreline", "vRk", "SPW", "RPW"]]
+        abbreviated_data = self.recent_results[["Match", "Date", "Surface", "Scoreline", "vRk", "SPW", "RPW"]]
         abbreviated_data = abbreviated_data[~abbreviated_data["Match"].str.contains("Davis Cup", na=False)]
         abbreviated_data = abbreviated_data[~abbreviated_data["Match"].str.contains("Laver Cup", na=False)]
         if num_weeks == -1:
@@ -98,7 +98,7 @@ class PlayerServeReturnStats(TennisDataScraper):
         return abbreviated_data[abbreviated_data["Date"] >= cutoff_date]
     
     def gather_from_match_date(self, match_date):
-        all_results = self.all_results[["Match", "Date", "Scoreline", "vRk", "SPW", "RPW"]]
+        all_results = self.all_results[["Match", "Date", "Surface", "Scoreline", "vRk", "SPW", "RPW"]]
         all_results = all_results[~all_results["Match"].str.contains("Davis Cup", na=False)]
         all_results = all_results[~all_results["Match"].str.contains("Laver Cup", na=False)]
         lower_bound = match_date - pd.Timedelta(days=7 * self.num_weeks)
@@ -110,6 +110,7 @@ class PlayerServeReturnStats(TennisDataScraper):
         
         for index, row in abbreviated_data.iterrows():
             tournament = row["Match"]
+            surface = row["Surface"]
             match = re.search(r"\d{4}\s+(.+?)\s+\S+$", tournament)
             if match:
                 tournament_name = match.group(1)
@@ -119,7 +120,15 @@ class PlayerServeReturnStats(TennisDataScraper):
                 surface_speed = surface_speed.iloc[0]
             else:
                 print("No Surface Speed Found for: ", tournament_name)
-                surface_speed = 1  # TODO: get an average surface speed based on surface type
+                if surface == "Grass":
+                    surface_speed = 1.140000
+                elif surface == "Clay":
+                    surface_speed = 0.719500
+                elif surface == "Hard":
+                    surface_speed = 1.118158
+                else: 
+                    print("SOMETHING WRONG WITH THE SURFACE SPEED")
+                    surface_speed = 1.0
 
             spw_num = float(row["SPW"][:-1])
             rpw_num = float(row["RPW"][:-1])

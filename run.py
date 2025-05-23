@@ -114,11 +114,14 @@ def batch_predeiction(match_data, num_weeks=-1):
     return match_df
 
 def main():
-    tourney = "Hamburg"
+    hamburg = "Hamburg"
+    geneva = "Geneva"
     matches = [
-        ("Flavio", "Cobolli", "Roberto", "BautistaAgut", tourney),
-        ("Tomas", "MartinEtcheverry", "Jiri", "Lehecka", tourney),]
-    
+        ("Flavio", "Cobolli", "Tomas", "MartinEtcheverry", hamburg),
+        ("Andrey", "Rublev", "Felix", "AugerAliassime", hamburg),
+        ("Sebastian", "Ofner", "Hubert", "Hurkacz", geneva),
+        ("Cameron", "Norrie", "Novak", "Djokovic", geneva),
+    ]
     today = date.today().isoformat()
     
     results_df = batch_predeiction(
